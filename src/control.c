@@ -1,5 +1,13 @@
 #include "control.h"
 
+
+struct StateVariable new_variable(long double root) {
+    struct StateVariable *temp;
+    temp->root = root;
+    return *temp;
+}
+
+
 struct PIDControl new_pid_controller(long double kp, long double ki, long double kd) {
     struct PIDControl *temp;
     temp->Kp = kp;

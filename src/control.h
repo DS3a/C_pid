@@ -2,10 +2,24 @@
 #define CONTROL_H
 
 
+/*
+
+    THE STATE VARIABLE LIB
+
+*/
+
 struct StateVariable {
     long double root, first_derivative, second_derivative;
 };
 
+struct StateVariable new_variable(long double root);
+
+
+/*
+
+    THE PID CONTROL LIB
+
+*/
 struct PIDControl {
     long double Kp, Ki, Kd;
     long double error;
