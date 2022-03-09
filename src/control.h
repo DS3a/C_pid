@@ -29,26 +29,42 @@ struct PIDControl {
 };
 
 
+typedef struct PIDControl *PIDControl_t;
+
 // initialize the Kp Ki Kd values and return the struct instance
-struct PIDControl new_pid_controller(long double kp, long double ki, long double kd);
+// void new_pid_controller(PIDControl_t temp, long double kp, long double ki, long double kd);
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
+    // constructor, kinda
+    PIDControl_t new_pid_controller(PIDControl_t temp , long double kp, long double ki, long double kd);
+
+    // function to set the setpoint (goalpoint)
+    PIDControl_t set_setpoint(PIDControl_t pid, long double setpoint);
 
 
-// function to set the setpoint (goalpoint)
-void set_setpoint(struct PIDControl *pid, long double setpoint);
+    // function to set the current state of the variable
+    PIDControl_t set_state(PIDControl_t pid, long double state);
 
 
-// function to set the current state of the variable
-void set_state(struct PIDControl *pid, long double state);
+    // function to set the limits of the pid controller
+    PIDControl_t set_limits(PIDControl_t pid, long double min, long double max);
 
 
-// function to set the limits of the pid controller
-void set_limits(struct PIDControl *pid, long double min, long double max);
+    // function to limit the controller effort
+    PIDControl_t limit(PIDControl_t pid);
 
 
-// function to limit the controller effort
-void limit(struct PIDControl *pid);
+    // compute the pid effort
+    PIDControl_t pid_compute(PIDControl_t pid);
 
 
-// compute the pid limit
-long double pid_compute(struct PIDControl *pid);
+    // get the pid effort
+    long double get_effort(PIDControl_t pid);
+
+#ifdef	__cplusplus
+}
+#endif
 #endif
